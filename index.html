@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    body{
+      background-color:#44D62C;
+      font-family: 'Poppins', sans-serif;
+    }
+    #title{
+        color: white;
+        text-align: center;
+    }
+    #content{
+        background-color: hsl(112, 67%, 51%);
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #btn{
+        background-color: #44D62C;
+        color: black;
+        border: 2px solid black;
+        min-width: auto;
+        min-height: 40px;
+        max-width: 120px;
+        font-size: 30px;
+        border-radius: 4px;
+        transition: 200ms linear;
+        text-align: center;
+    }
+    #btn:hover{
+        background-color: #bce7b5;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="content">
+    <h1 id="title">Está chovendo?</h1>
+    <button onclick="estadoChuva()" id="btn">CHECAR</button>
+    <h1 id="result">O resultado é aqui</h1>
+  </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+      var socket = io();
+      const id = Math.floor(Math.random() * 9000);
+      console.log(id)
+      function estadoChuva(){
+      
+        socket.emit('askChuva', id);
+      }
+
+      
+  socket.on('resposta', ({ resposta, _id }) => {
+    if(_id == id){
+        document.getElementById("result").innerHTML = resposta;
+      }
+      
+  });
+
+    </script>
+</body>
+</html>
+
