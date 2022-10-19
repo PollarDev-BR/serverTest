@@ -1,71 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-    body{
-      background-color:#44D62C;
-      font-family: 'Poppins', sans-serif;
-    }
-    #title{
-        color: white;
-        text-align: center;
-    }
-    #content{
-        background-color: hsl(112, 67%, 51%);
-        height: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    #btn{
-        background-color: #44D62C;
-        color: black;
-        border: 2px solid black;
-        min-width: auto;
-        min-height: 40px;
-        max-width: 120px;
-        font-size: 30px;
-        border-radius: 4px;
-        transition: 200ms linear;
-        text-align: center;
-    }
-    #btn:hover{
-        background-color: #bce7b5;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkGuide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #2b2b2b;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #content {
+            width: 100vw;
+            height: 95vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            height: 95vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        #top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            height: fit-content;
+            padding-top: 20px;
+            width: 100vw;
+        }
+
+        #top #title {
+            font-size: 45px;
+            padding: 0;
+            margin: 0;
+        }
+
+        #status {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .dot {
+            height: 30px;
+            width: 30px;
+            background-color: rgb(29, 168, 82);
+            border-radius: 50%;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        #status #id {
+            margin: 0;
+        }
+
+        .messages,
+        .send {
+            margin-top: 40px;
+            background-color: #373737;
+            width: 90vw;
+            height: auto;
+        }
+
+        .messages .sender,
+        .send .msgTop,
+        .send .sender {
+            font-size: 30px;
+            margin: 5px;
+        }
+
+        .messages .link {
+            margin: 5px;
+        }
+
+        .messages .msgTop {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .messages img {
+            width: 36px;
+            height: 36px;
+            padding-top: 5px;
+        }
+
+        #bottom {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            background-color: rgba(35, 35, 35, .95);
+            color: white;
+            font-size: 25px;
+            backdrop-filter: blur(8px);
+            width: 100vw;
+        }
+
+        #bottom img {
+            width: 80px;
+            height: 80px;
+        }
+
+        #sendTo {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: auto;
+            align-items: center;
+        }
+
+        #sendTo input {
+            max-height: 20px;
+        }
+
+        #sendTo p {
+            margin: 0;
+            padding: 0;
+        }
+
+        #sendContent {
+            height: auto;
+            min-height: 100px;
+            width: 80vw;
+            background-color: #373737;
+            color: white;
+            border: 1px solid white;
+            margin: 0 auto;
+            display: block;
+            border: 2px solid white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #send {
+            background-color: #31a9df;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            height: 40px;
+            width: 80px;
+            margin: 0 auto;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: 200ms linear;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #send:hover {
+            background-color: #5bb1d8;
+        }
+    </style>
 </head>
+
 <body>
-  
-  <div id="content">
-    <h1 id="title">Está chovendo?</h1>
-    <button onclick="estadoChuva()" id="btn">CHECAR</button>
-    <h1 id="result">O resultado é aqui</h1>
-  </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
+    <div id="content">
+        <div id="top">
+            <div id="status">
+                <span id="dot" class="dot"></span>
+                <p id="id">ID: 000</p>
+            </div>
+            <p id="title">My Recives:</p>
+        </div>
+        <div class="messages">
+            <div class="msgTop">
+                <p id="sender" class="sender">
+                    Sender: #000
+                </p>
+                <img src="https://i.ibb.co/fqjMXW1/Sem-t-tulo-2.png">
+            </div>
+            <p class="sender">Content:</p>
+            <p id="link" class="link"> O conteudo enviado irá aparecer aqui... </p>
+        </div>
 
-      var socket = io();
-      const id = Math.floor(Math.random() * 9000);
-      console.log(id)
-      function estadoChuva(){
-      
-        socket.emit('askChuva', id);
-      }
+        <div class="send">
+            <div class="msgTop">
+                <div id="sendTo">
+                    <p>Send to:</p>
+                    <input id="sendID" type="number">
+                </div>
+            </div>
+            <p class="sender">Content:</p>
+            <input id="sendContent" type="text">
+            <button onclick="sendTo()" id="send">Send</button>
+        </div>
+      <div id="bottom">
+        <img src="https://i.ibb.co/S5dJBdw/Sem-t-tulo-1.png" alt="">
+        <h1>
+            LinkGuide
+        </h1>
+    </div>
+    </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const id = Math.floor(Math.random() * 9999);
+            try {
+                var socket = io();
+                console.log(id)
+                document.getElementById("id").innerHTML = "ID: " + id;
+                socket.on("connect_error", (err) => {
+                    console.log(`connect_error due to ${err.message}`);
+                    document.getElementById("dot").style.backgroundColor = "red";
+                });
+                socket.on('serverSend', ({
+                    iid,
+                    ootherID,
+                    ccnt
+                }) => {
+                    if (iid == id) {
+                        alert("Você recebeu uma mensagem");
+                        document.getElementById("sender").innerHTML = "Sender: #" + ootherID;
+                        document.getElementById("link").innerHTML = ccnt;
+                    }
+                })
+            } catch (error) {
+                document.getElementById("dot").style.backgroundColor = "red";
+            }
 
-      
-  socket.on('resposta', ({ resposta, _id }) => {
-    if(_id == id){
-        document.getElementById("result").innerHTML = resposta;
-      }
-      
-  });
-
-    </script>
+            function sendTo() {
+                var idd = document.getElementById("sendID").value;
+                var content = document.getElementById("sendContent").value;
+                socket.emit('send', {
+                    otherID: parseInt(idd),
+                    id: id,
+                    cnt: content
+                });
+                alert("Você enviou uma mensagem");
+            }
+        </script>
 </body>
-</html>
 
+</html>

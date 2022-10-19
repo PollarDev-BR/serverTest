@@ -10,26 +10,24 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    }),
-    socket.on('askChuva',(id) =>{
-        console.log("Cliente esta perguntando se há chuva");
-        console.log(id)
-       const fs = require('fs');
-      var _id = id;
-      fs.readFile('database.json', 'utf8', (err, data) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        var obj = JSON.parse(data);
-        io.emit('resposta', {resposta: obj.chuva.valor,_id : id});
-      })
-        
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  }),
+    socket.on('send', ({ otherID, id, cnt }) => {
+      console.log("Um cliente está enviando dados para o otro...")
+      console.log("ID do sender: " + id)
+      console.log("ID do reciver: " + otherID);
+      console.log("Conteudo: " + cnt)
+      if (id != otherID) {
+        io.emit("serverSend", { iid: otherID, ootherID: id, ccnt: cnt })
+        console.log("Conteudo enviado com sucesso!")
+      }
+
+
+
     })
-  });
+});
 
 server.listen(3000, () => {
   console.log('listening on *:3000');

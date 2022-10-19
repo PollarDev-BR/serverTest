@@ -1,6 +1,6 @@
 {
     "chuva": {
-        "valor": "Não está chovendo",
-        "itensidade": "Forte"
+        "valor": "Chovendo levemente",
+        "itensidade": "Fraca"
     }
 }
